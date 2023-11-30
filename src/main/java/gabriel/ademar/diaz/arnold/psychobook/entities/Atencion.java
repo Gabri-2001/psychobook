@@ -17,6 +17,9 @@ import java.sql.Time;
 @Table(name = "atencion")
 public class Atencion {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "dia_semana", nullable = false)
     private String dia_semana;
 
@@ -25,4 +28,7 @@ public class Atencion {
 
     @Column(name = "horario_fin", nullable = false)
     private Time horario_fin;
+
+    @OneToOne(mappedBy = "atencion")
+    private Centros centro;
 }

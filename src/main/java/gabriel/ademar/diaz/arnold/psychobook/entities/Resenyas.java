@@ -1,15 +1,13 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +17,9 @@ import java.sql.Timestamp;
 @Table(name = "resenyas")
 public class Resenyas {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "puntuacion", nullable = false)
     private Integer puntuacion;
 
@@ -27,5 +28,13 @@ public class Resenyas {
 
     @Column(name = "fecha", nullable = false)
     private Timestamp fecha;
+
+    @ManyToOne
+    @JoinColumn(name = "rensenyas_id")
+    private Centros centro;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Clientes cliente;
 
 }
