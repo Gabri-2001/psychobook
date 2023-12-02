@@ -1,8 +1,9 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 @Entity
-@Table(name = "EspecialidadesHasPsicologos")
+@Table(name = "PsicologosHasEspecialidades")
 public class EspecialidadesHasPsicologos {
 
     @Id
@@ -10,11 +11,12 @@ public class EspecialidadesHasPsicologos {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "especialidad_id")
+    @JoinColumn(name = "especialidades_id")
     private Especialidades especialidad;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "psicologo_id")
+    @JoinColumn(name = "psicologos_id")
     private Psicologos psicologo;
 
 }

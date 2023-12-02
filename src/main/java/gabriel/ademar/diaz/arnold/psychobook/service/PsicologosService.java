@@ -5,6 +5,6 @@ import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import java.util.List;
 
 public interface PsicologosService {
-    List<Psicologos> obtenerTodosLosPsicologos();
+    List<Psicologos> getAllPsicologos();
     Psicologos guardarPsicologo(Psicologos psicologo);
 }

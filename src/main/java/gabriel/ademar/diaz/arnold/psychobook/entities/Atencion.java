@@ -1,6 +1,7 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +27,10 @@ public class Atencion {
     @Column(name = "horario_inicio", nullable = false)
     private Time horario_inicio;
 
-    @Column(name = "horario_fin", nullable = false)
+    @Column(name = "hora_fin", nullable = false)
     private Time horario_fin;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "atencion")
     private Centros centro;
 }

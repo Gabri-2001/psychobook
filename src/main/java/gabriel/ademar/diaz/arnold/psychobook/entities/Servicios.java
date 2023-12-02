@@ -32,5 +32,5 @@ public class Servicios {
     private List<Centros> centros;
 
     @OneToMany(mappedBy = "servicio")
-    private List<CentrosHasEtiquetas> servicio_Centro;
+    private List<CentrosHasServicios> servicio_Centro;
 }

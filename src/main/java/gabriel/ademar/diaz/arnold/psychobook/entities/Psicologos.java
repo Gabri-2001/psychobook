@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,16 +37,22 @@ public class Psicologos {
     @JoinColumn(name="users_id")
     private Users user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "psicologo")
     private List<EspecialidadesHasPsicologos> especialidadesHasPsicologos;
 
     @ManyToMany
     @JoinTable(
-            name = "EspecialidadesHasPsicologos",
-            joinColumns = @JoinColumn(name = "psicologo_id"),
-            inverseJoinColumns = @JoinColumn(name = "especialidad_id")
+            name = "PsicologosHasEspecialidades",
+            joinColumns = @JoinColumn(name = "psicologos_id"),
+            inverseJoinColumns = @JoinColumn(name = "especialidades_id")
     )
     private List<Especialidades> especialidades;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "centros_id")
+    private Centros centro;
 
 
 }

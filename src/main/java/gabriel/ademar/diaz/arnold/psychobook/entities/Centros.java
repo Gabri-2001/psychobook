@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -66,6 +67,10 @@ public class Centros {
 
     @OneToMany(mappedBy = "centro")
     private List<CentrosHasServicios> centro_Servicio;
+
+
+    @OneToMany(mappedBy = "centro", cascade = CascadeType.ALL)
+    private List<Psicologos> psicologos;
 
 
 }

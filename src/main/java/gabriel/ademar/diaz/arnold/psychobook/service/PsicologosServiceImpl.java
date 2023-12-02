@@ -16,7 +16,7 @@ public class PsicologosServiceImpl implements PsicologosService{
     }
 
     @Override
-    public List<Psicologos> obtenerTodosLosPsicologos() {
+    public List<Psicologos> getAllPsicologos() {
         return psicologosRepository.findAll();
     }
 

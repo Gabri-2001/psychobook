@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Users {
     @OneToOne(mappedBy = "user")
     private Clientes cliente;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Psicologos psicologo;
 }

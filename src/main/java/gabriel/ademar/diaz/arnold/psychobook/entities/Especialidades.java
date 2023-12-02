@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +26,11 @@ public class Especialidades {
     @Column(name = "centro", nullable = false)
     private String centro;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "especialidad")
     private List<EspecialidadesHasPsicologos> especialidadesHasPsicologos;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "especialidades")
     private List<Psicologos> psicologos;
 
