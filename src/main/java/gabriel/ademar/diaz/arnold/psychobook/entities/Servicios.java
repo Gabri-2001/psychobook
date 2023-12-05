@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +29,11 @@ public class Servicios {
     @Column(name = "tarifas", nullable = false)
     private String tarifas;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "servicios")
     private List<Centros> centros;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "servicio")
     private List<CentrosHasServicios> servicio_Centro;
 }

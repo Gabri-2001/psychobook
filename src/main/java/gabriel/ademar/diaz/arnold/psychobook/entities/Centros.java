@@ -55,6 +55,7 @@ public class Centros {
     )
     private List<Etiquetas> etiquetas;
 
+
     @ManyToMany
     @JoinTable(
             name = "centrosHasServicios",
@@ -67,6 +68,7 @@ public class Centros {
     @OneToMany(mappedBy = "centro")
     private List<CentrosHasEtiquetas> centro_Etiqueta;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "centro")
     private List<CentrosHasServicios> centro_Servicio;
 

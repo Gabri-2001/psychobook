@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ResenyasServicesImpl implements ResenyasService{
+public class ResenyasServiceImpl implements ResenyasService{
 
     private final ResenyasRepository resenyasRepository;
 
-    public ResenyasServicesImpl(ResenyasRepository resenyasRepository) {
+    public ResenyasServiceImpl(ResenyasRepository resenyasRepository) {
         this.resenyasRepository = resenyasRepository;
     }
 
