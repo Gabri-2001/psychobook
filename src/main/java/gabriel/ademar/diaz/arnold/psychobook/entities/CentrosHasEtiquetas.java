@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,11 +20,13 @@ public class CentrosHasEtiquetas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "centro_id")
-    private Centros centro;
 
     @ManyToOne
-    @JoinColumn(name = "etiqueta_id")
+    @JoinColumn(name = "centros_id")
+    private Centros centro;
+
+
+    @ManyToOne
+    @JoinColumn(name = "etiquetas_id")
     private Etiquetas etiqueta;
 }

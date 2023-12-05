@@ -32,11 +32,11 @@ public class Resenyas {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "rensenyas_id")
+    @JoinColumn(name = "centros_id")
     private Centros centro;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "clientes_id")
     private Clientes cliente;
 
 }

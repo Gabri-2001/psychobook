@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Etiquetas {
     @ManyToMany(mappedBy = "etiquetas")
     private List<Centros> centros;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "etiqueta")
     private List<CentrosHasEtiquetas> etiqueta_Centro;
 

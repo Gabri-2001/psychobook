@@ -46,22 +46,24 @@ public class Centros {
     @OneToMany(mappedBy = "centro")
     private List<Resenyas> rensenyas_id;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "centrosHasEtiquetas",
-            joinColumns = @JoinColumn(name = "centro_id"),
-            inverseJoinColumns = @JoinColumn(name = "etiqueta_id")
+            joinColumns = @JoinColumn(name = "centros_id"),
+            inverseJoinColumns = @JoinColumn(name = "etiquetas_id")
     )
     private List<Etiquetas> etiquetas;
 
     @ManyToMany
     @JoinTable(
             name = "centrosHasServicios",
-            joinColumns = @JoinColumn(name = "centro_id"),
-            inverseJoinColumns = @JoinColumn(name = "servicio_id")
+            joinColumns = @JoinColumn(name = "centros_id"),
+            inverseJoinColumns = @JoinColumn(name = "servicios_id")
     )
     private List<Servicios> servicios;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "centro")
     private List<CentrosHasEtiquetas> centro_Etiqueta;
 

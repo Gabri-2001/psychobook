@@ -11,10 +11,10 @@ public class CentrosHasServicios {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "centro_id")
+    @JoinColumn(name = "centros_id")
     private Centros centro;
 
     @ManyToOne
-    @JoinColumn(name = "servicio_id")
+    @JoinColumn(name = "servicios_id")
     private Servicios servicio;
 }

@@ -27,6 +27,7 @@ public class Users {
     @Column(name = "rol", nullable = false)
     private String rol;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private Clientes cliente;
 
