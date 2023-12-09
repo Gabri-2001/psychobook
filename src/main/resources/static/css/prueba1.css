@@ -1,0 +1,225 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+    background: #f5f5f5; /* Mantén el fondo claro para contraste */
+    color: #333; /* Este es un gris oscuro, lo mantendré para el texto */
+    line-height: 1.6;
+}
+
+header {
+    background: #004d40; /* Un verde oscuro basado en el logo */
+    color: #fff; /* Texto blanco para alto contraste */
+    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 150px;
+}
+
+header .logo-container {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+header h1 {
+    font-size: 3.5em;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+header .logo-container img {
+    height: auto;
+    width: 100px; /* Ajusta según sea necesario */
+    display: block; /* Esto puede ayudar a manejar el espaciado si es necesario */
+    margin: auto;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    background: #00695c; /* Un tono de verde medio del logo */
+    color: #fff;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Texto blanco para alto contraste */
+    font-size: 2em;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #004d40; /* Un tono verde más oscuro para hover, tomado del header */
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+}
+input[type=search], input[type=submit]{
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+}
+
+.submit {
+    background: #ffcc00; /* Si el logo tiene un color acentuado que se adapte, úsalo aquí */
+    color: #333;
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+
+input[type=submit]:hover {
+    filter: brightness(90%);
+}
+
+main {
+
+    background: #ffffff;
+    color: #333;
+    padding: 20px;
+}
+
+#search-form {
+    margin: 20px 0;
+}
+
+#search-box {
+    padding: 10px;
+    font-size: 1em;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit2 {
+    font-size: 1em;
+    padding: 10px 15px;
+    background: #00695c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para los cambios de estado */
+
+}
+
+.submit2:hover {
+    background: #004d40;
+}
+
+#results {
+    margin-top: 20px;
+    /* Agregar más estilos para tus resultados aquí */
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card styles */
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.profile-image {
+  flex-shrink: 0;
+}
+
+.profile-image img {
+  border-radius: 10px 0 0 10px;
+  width: 150px;
+  height: auto;
+}
+
+.profile-info {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.profile-name {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.profile-specs {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.profile-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.profile-link {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.profile-link:hover {
+  background-color: #0056b3;
+}
+
+.promotion-tag {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  position: absolute;
+  top: 20px;
+  right: -1px;
+}
+
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-image img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .promotion-tag {
+    position: static;
+    margin-top: 20px;
+  }
+}

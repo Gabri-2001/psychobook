@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Buscador de Centros - PsychoBook</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/prueba1.css" />
+</head>
+
+<body>
+<header>
+    <div class="logo-container">
+        <img src="/img/logo.png" alt="Logo" />
+    </div>
+    <h1>Psychobook</h1></header>
+<nav>
+    <ul>
+        <li><a href="index">Inicio</a></li>
+        <li><a href="listado_psicologos">Nuestros Psicólogos</a></li>
+        <li><a href="#">Proyectos</a></li>
+        <li><a href="#">Contacto</a></li>
+    </ul>
+
+    <form>
+        <input type="search" name="q" placeholder="Buscar" />
+        <input type="submit" class="submit" value="¡Vamos!" />
+    </form>
+</nav>
+
+<main>
+    <h2>Encuentra un Centro Cerca de Ti</h2>
+    <form id="search-form">
+        <input type="text" id="search-box" name="q" placeholder="Ingresa tu dirección..." />
+        <input type="submit" class="submit2" value="Buscar" />
+    </form>
+    <h1>Listado de Centros</h1>
+
+    <div class="container" th:each="centros : ${centros}">
+        <!-- Inicio del perfil de psicólogo -->
+        <div class="profile-card">
+            <div class="profile-image">
+                <img src="img/usuario.png" alt="Alberto Sancho">
+            </div>
+            <div class="profile-info">
+                <h2 class="profile-name" th:text="${centros.nombre}">Alberto Sancho</h2>
+                <span th:each="especialidades, iterStat : ${especialidades}" th:text="${iterStat.last} ? ${especialidades.nombre} : ${especialidades.nombre} + ', '">
+                Aceptación y compromiso, Cognitivo-conductual, Integradora, Psicodinámica
+                </span>
+                <p class="profile-description">Es posible que te hayas preguntado: no sé si merece la pena, qué vergüenza, decirte que yo también pasé por esa fase, Alberto, ¿tú?, sí, has leído bien. Hago sesiones de mayor duración con lo que podremos distanciar más las sesiones.</p>
+                <a href="#" class="profile-link">Ver Ficha</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <!-- El footer como en la página principal -->
+</footer>
+
+<script>
+    // Aquí tendrías que añadir el JavaScript para manejar el evento de envío del formulario y realizar la búsqueda.
+  </script>
+</body>
+</html>

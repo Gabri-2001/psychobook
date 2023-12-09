@@ -1,10 +1,13 @@
 package gabriel.ademar.diaz.arnold.psychobook.service;
 
+import gabriel.ademar.diaz.arnold.psychobook.entities.Especialidades;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.repository.PsicologosRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PsicologosServiceImpl implements PsicologosService{
@@ -25,5 +28,18 @@ public class PsicologosServiceImpl implements PsicologosService{
         // Lógica de negocios adicional si es necesario
         return psicologosRepository.save(psicologo);
     }
+
+    @Override
+    public Set<Especialidades> obtenerEspecialidadesUnicas() {
+        List<Psicologos> psicologos = psicologosRepository.findAll();
+        Set<Especialidades> especialidadesUnicas = new HashSet<>();
+
+        for (Psicologos psicologo : psicologos) {
+            especialidadesUnicas.addAll(psicologo.getEspecialidades());
+        }
+        return especialidadesUnicas;
+
+    }
+
 
 }

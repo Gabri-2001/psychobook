@@ -1,5 +1,6 @@
 package gabriel.ademar.diaz.arnold.psychobook.controller;
 
+import gabriel.ademar.diaz.arnold.psychobook.entities.Especialidades;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.service.PsicologosService;
 import org.springframework.web.bind.annotation.GetMapping;
