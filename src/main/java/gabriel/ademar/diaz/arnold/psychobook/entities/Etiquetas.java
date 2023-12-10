@@ -24,11 +24,11 @@ public class Etiquetas {
     private String nombre;
 
     @ManyToMany(mappedBy = "etiquetas")
-    private List<Centros> centros;
+    private List<Psicologos> psicologos;
 
     @JsonIgnore
     @OneToMany(mappedBy = "etiqueta")
-    private List<CentrosHasEtiquetas> etiqueta_Centro;
+    private List<PsicologosHasEtiquetas> etiqueta_Psicologo;
 
 
 }

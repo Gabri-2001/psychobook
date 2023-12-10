@@ -28,12 +28,17 @@ public class Servicios {
 
     @Column(name = "tarifas", nullable = false)
     private String tarifas;
-
+/*
     @JsonIgnore
     @ManyToMany(mappedBy = "servicios")
-    private List<Centros> centros;
+    private List<Psicologos> psicologos;
 
     @JsonIgnore
     @OneToMany(mappedBy = "servicio")
-    private List<CentrosHasServicios> servicio_Centro;
+    private List<PsicologosHasServicios> servicio_Psicologo;
+*/
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "psicologos_id")
+    private Psicologos psicologo;
 }

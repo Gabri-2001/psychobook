@@ -30,7 +30,13 @@ public class Atencion {
     @Column(name = "hora_fin", nullable = false)
     private Time horario_fin;
 
+    /*
     @JsonIgnore
     @OneToOne(mappedBy = "atencion")
-    private Centros centro;
+    private Psicologos psicologo;
+*/
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "psicologos_id")
+    private Psicologos psicologo;
 }

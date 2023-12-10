@@ -23,12 +23,9 @@ public class Especialidades {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "centro", nullable = false)
-    private String centro;
-
     @JsonIgnore
     @OneToMany(mappedBy = "especialidad")
-    private List<EspecialidadesHasPsicologos> especialidadesHasPsicologos;
+    private List<PsicologosHasEspecialidades> psicologoHasEspecialidades;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "especialidades")

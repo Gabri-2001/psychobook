@@ -32,8 +32,8 @@ public class Resenyas {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "centros_id")
-    private Centros centro;
+    @JoinColumn(name = "psicologos_id")
+    private Psicologos psicologo;
 
     @ManyToOne
     @JoinColumn(name = "clientes_id")

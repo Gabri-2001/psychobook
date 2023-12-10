@@ -13,8 +13,8 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "CentrosHasEtiquetas")
-public class CentrosHasEtiquetas {
+@Table(name = "psicologosHasEtiquetas")
+public class PsicologosHasEtiquetas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,8 @@ public class CentrosHasEtiquetas {
 
 
     @ManyToOne
-    @JoinColumn(name = "centros_id")
-    private Centros centro;
+    @JoinColumn(name = "psicologos_id")
+    private Psicologos psicologo;
 
 
     @ManyToOne
