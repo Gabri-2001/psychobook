@@ -10,4 +10,6 @@ public interface PsicologosService {
     List<Psicologos> getAllPsicologos();
     Psicologos guardarPsicologo(Psicologos psicologo);
     Set<Especialidades> obtenerEspecialidadesUnicas();
+    List<Psicologos> buscarPorLocalidad(String localidad);
+    List<Psicologos> buscarPorEtiqueta(String etiqueta);
 }

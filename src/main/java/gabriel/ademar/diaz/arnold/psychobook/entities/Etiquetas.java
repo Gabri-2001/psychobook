@@ -22,7 +22,7 @@ public class Etiquetas {
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "etiquetas")
     private List<Psicologos> psicologos;
 

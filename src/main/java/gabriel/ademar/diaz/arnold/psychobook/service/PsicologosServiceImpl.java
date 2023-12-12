@@ -41,5 +41,15 @@ public class PsicologosServiceImpl implements PsicologosService{
 
     }
 
+    @Override
+    public List<Psicologos> buscarPorLocalidad(String localidad) {
+        return psicologosRepository.findByLocalidad(localidad);
+
+    }
+    @Override
+    public List<Psicologos> buscarPorEtiqueta(String etiqueta) {
+        return psicologosRepository.findByEtiquetasNombre(etiqueta);
+    }
+
 
 }

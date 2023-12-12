@@ -5,19 +5,19 @@
     <title>Buscador de Psicólogos - PsychoBook</title>
     <link rel="shortcut icon" href="/img/logo.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../css/prueba1.css" />
+    <link rel="stylesheet" href="../../css/prueba1.css"/>
 </head>
 
 <body>
 <header>
     <div class="logo-container">
-        <img src="../img/logo.png" alt="Logo" />
+        <img src="../../img/logo.png" alt="Logo" />
     </div>
     <h1>Psychobook</h1></header>
 <nav>
     <ul>
-        <li><a href="index">Inicio</a></li>
-        <li><a href="listado_psicologos">Nuestros Psicólogos</a></li>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../listado_psicologos">Nuestros Psicólogos</a></li>
         <li><a href="#">Proyectos</a></li>
         <li><a href="#">Contacto</a></li>
     </ul>
@@ -38,13 +38,13 @@
         <input id="search-box" type="text" name="localidad" placeholder="Ingrese localidad">
         <button type="submit" class="submit2">Buscar</button>
     </form>
-    <h1>Listado de Psicólogos</h1>
+    <h1>Listado de Psicólogos por Etiqueta <span th:text="${etiqueta}">[Etiqueta]</span></h1>
 
     <div class="container" th:each="psicologos : ${psicologos}">
         <!-- Inicio del perfil de psicólogo -->
         <div class="profile-card">
             <div class="profile-image">
-                <img src="img/usuario.png" alt="Alberto Sancho">
+                <img src="../../img/usuario.png" alt="Alberto Sancho">
             </div>
             <div class="profile-info">
                 <h2 class="profile-name" th:text="${psicologos.nombre}">Alberto Sancho</h2>
@@ -63,4 +63,5 @@
 </footer>
 
 </body>
+</html>
 </html>

@@ -72,7 +72,7 @@ public class Psicologos {
     )
     private List<Especialidades> especialidades;
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(
             name = "psicologosHasEtiquetas",
