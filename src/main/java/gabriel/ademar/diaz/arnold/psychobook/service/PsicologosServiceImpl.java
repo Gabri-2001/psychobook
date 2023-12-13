@@ -3,10 +3,13 @@ package gabriel.ademar.diaz.arnold.psychobook.service;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Especialidades;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.repository.PsicologosRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Service
@@ -42,13 +45,23 @@ public class PsicologosServiceImpl implements PsicologosService{
     }
 
     @Override
-    public List<Psicologos> buscarPorLocalidad(String localidad) {
-        return psicologosRepository.findByLocalidad(localidad);
+    public Page<Psicologos> buscarPorLocalidad(String localidad, Pageable pageable) {
+        return psicologosRepository.findByLocalidad(localidad, pageable);
 
     }
     @Override
-    public List<Psicologos> buscarPorEtiqueta(String etiqueta) {
-        return psicologosRepository.findByEtiquetasNombre(etiqueta);
+    public Page<Psicologos> buscarPorEtiqueta(String etiqueta, Pageable pageable) {
+        return psicologosRepository.findByEtiquetasNombre(etiqueta, pageable);
+    }
+
+    @Override
+    public Psicologos buscarPorId(Long id) {
+        return psicologosRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Psicólogo no encontrado con el ID: " + id));
+    }
+
+    public Page<Psicologos> getAllPsicologos(Pageable pageable) {
+        return psicologosRepository.findAll(pageable);
     }
 
 

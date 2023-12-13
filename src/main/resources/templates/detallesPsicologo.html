@@ -1,0 +1,102 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+
+    <title>PsychoBook</title>
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
+            rel="stylesheet"
+            type="text/css" />
+    <link rel="shortcut icon" href="../../img/logo.png">
+    <link rel="stylesheet" href="../../css/detallesPsicologo.css" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="/img/logo.png" alt="Logo" />
+    </div>
+    <h1>Psychobook</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../listado_psicologos">Nuestros Psicólogos</a></li>
+        <li><a href="#">Proyectos</a></li>
+        <li><a href="#">Contacto</a></li>
+    </ul>
+
+
+    <form>
+        <input type="search" name="q" placeholder="Buscar" />
+        <input type="submit" value="¡Vamos!" />
+    </form>
+</nav>
+
+
+    <main class="main-content" th:object="${psicologos}">
+        <section class="profile-card">
+            <img src="/img/usuario.png" class="profile-pic">
+            <h1 th:text="*{nombre}">Gaby Muñoz</h1>
+            <p class="verified">Psicólogo verificado por Psychobook</p>
+            <!-- Botones y acciones aquí -->
+        </section>
+
+        <section class="professional-info">
+            <div class="info-and-reviews">
+            <div class="info-section">
+                <h2>Información</h2>
+                <p><span th:text="*{descripcion}"></span></p>
+                <p>Localidad: <span th:text="*{localidad}"></span></p>
+                <p>Servicio Presencial: <span th:text="*{presencial}"></span></p>
+                <p>Servicio Online: <span th:text="*{linea}"></span></p>
+                <p>Universidad: <span th:text="${psicologos.centro.nombre}"></span></p>
+                <p>Dirección: <span th:text="${psicologos.centro.direccion}"></span></p>
+                <p>Web Universidad: <span th:text="${psicologos.centro.web}"></span></p>
+            </div>
+                <div class="reviews-section">
+                    <h2>Especialidades</h2>
+                    <p th:each="especialidades : ${psicologos.especialidades}" th:text="${especialidades.nombre}"></p>
+                </div>
+                <div class="servicios-section" th:each="servicios : ${psicologos.servicios}">
+                    <h2>Servicio de <span th:text="${servicios.nombre}"></span></h2>
+                    <p th:text="${servicios.descripcion}"></p>
+                    <p> Tarifa: <span th:text="${servicios.tarifas}"></span></p>
+                </div>
+            </div>
+
+            <div class="contact-and-additional-info">
+                <div class="contact-info">
+                <h2>DATOS DE CONTACTO</h2>
+                <p>Email: <span th:text="*{email}"></span></p>
+                <p>Teléfono: <span th:text="*{telefono}"></span></p>
+                </div>
+                <div class="atencion-info">
+                    <h2>Atención</h2>
+                    <p th:each="atencion, iterStat : ${psicologos.atencion}">
+                    <span
+                          th:text="|${atencion.dia_semana} ${atencion.horario_inicio} - ${atencion.horario_fin}|">
+</span></p>
+                </div>
+            <div class="resenyas-info" th:each="resenyas : ${psicologos.resenyas}">
+                <h2>Reseña de <span th:text="${resenyas.cliente.nombre}"></span></h2>
+                <p>Puntuacion: <span th:text="${resenyas.puntuacion}"></span></p>
+                <p>Comentario: <span th:text="${resenyas.comentario}"></span></p>
+            </div>
+            </div>
+            <a href="/listado_psicologos" class="floating-button">Volver</a>
+        </section>
+    </main>
+
+<footer>
+    <p>©Copyright 2023 PsychoBook. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

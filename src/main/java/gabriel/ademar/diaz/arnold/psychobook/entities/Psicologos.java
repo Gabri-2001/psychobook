@@ -81,23 +81,11 @@ public class Psicologos {
     )
     private List<Etiquetas> etiquetas;
 
-/*
-    @ManyToMany
-    @JoinTable(
-            name = "psicologosHasServicios",
-            joinColumns = @JoinColumn(name = "psicologos_id"),
-            inverseJoinColumns = @JoinColumn(name = "servicios_id")
-    )
-    private List<Servicios> servicios;
-*/
+
     @JsonIgnore
     @OneToMany(mappedBy = "psicologo")
     private List<PsicologosHasEtiquetas> psicologo_Etiqueta;
-/*
-    @JsonIgnore
-    @OneToMany(mappedBy = "psicologo")
-    private List<PsicologosHasServicios> psicologo_Servicio;
-*/
+
     @ManyToOne
     @JoinColumn(name ="centros_id")
     private Centros centro;
@@ -106,10 +94,10 @@ public class Psicologos {
     private List<Atencion> atencion;
 
     @OneToMany(mappedBy = "psicologo")
-    private List<Resenyas> rensenyas_id;
+    private List<Resenyas> resenyas;
 
     @OneToMany(mappedBy = "psicologo")
-    private List<Servicios> servicios_id;
+    private List<Servicios> servicios;
 
 
 

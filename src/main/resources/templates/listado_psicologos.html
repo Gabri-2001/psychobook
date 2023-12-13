@@ -5,7 +5,7 @@
     <title>Buscador de Psicólogos - PsychoBook</title>
     <link rel="shortcut icon" href="/img/logo.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../css/prueba1.css" />
+    <link rel="stylesheet" href="../css/listado_psicologos.css" />
 </head>
 
 <body>
@@ -34,15 +34,14 @@
     </div>
 
     <h1>Buscar Psicólogos por Localidad</h1>
-    <form id="search-form" th:action="@{/psicologos/buscarPorLocalidad}" method="post">
+    <form id="search-form" th:action="@{/psicologos/buscarPorLocalidad}" method="get">
         <input id="search-box" type="text" name="localidad" placeholder="Ingrese localidad">
         <button type="submit" class="submit2">Buscar</button>
     </form>
     <h1>Listado de Psicólogos</h1>
 
-    <div class="container" th:each="psicologos : ${psicologos}">
-        <!-- Inicio del perfil de psicólogo -->
-        <div class="profile-card">
+    <div class="container" th:if="${psicologosPage}" >
+        <div class="profile-card" th:each="psicologos : ${psicologosPage.content}">
             <div class="profile-image">
                 <img src="img/usuario.png" alt="Alberto Sancho">
             </div>
@@ -52,14 +51,28 @@
 
                 </span>
                 <p class="profile-description" th:text="${psicologos.descripcion}">Es posible que te hayas preguntado: no sé si merece la pena, qué vergüenza, decirte que yo también pasé por esa fase, Alberto, ¿tú?, sí, has leído bien. Hago sesiones de mayor duración con lo que podremos distanciar más las sesiones.</p>
-                <a href="#" class="profile-link">Ver Ficha</a>
+                <a th:href="@{/psicologos/detalle/{id}(id=${psicologos.id})}" class="profile-link">Ver Ficha</a>
             </div>
+
+        </div>
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li th:classappend="${psicologosPage.first ? 'disabled' : ''}">
+                    <a th:href="@{/listado_psicologos(page=${psicologosPage.number - 1}, size=${psicologosPage.size})}">Anterior</a>
+                </li>
+                <li th:classappend="${psicologosPage.last ? 'disabled' : ''}">
+                    <a th:href="@{/listado_psicologos(page=${psicologosPage.number + 1}, size=${psicologosPage.size})}">Siguiente</a>
+                </li>
+            </ul>
+
         </div>
     </div>
+
+
 </main>
 
 <footer>
-    <!-- El footer como en la página principal -->
+    <p>©Copyright 2023 PsychoBook. Todos los derechos reservados.</p>
 </footer>
 
 </body>

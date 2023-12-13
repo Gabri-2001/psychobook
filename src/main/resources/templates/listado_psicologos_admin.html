@@ -5,21 +5,21 @@
     <title>Buscador de Psicólogos - PsychoBook</title>
     <link rel="shortcut icon" href="/img/logo.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../../css/listado_psicologos.css"/>
+    <link rel="stylesheet" href="../css/listado_psicologos_admin.css" />
 </head>
 
 <body>
 <header>
     <div class="logo-container">
-        <img src="../../img/logo.png" alt="Logo" />
+        <img src="../img/logo.png" alt="Logo" />
     </div>
     <h1>Psychobook</h1></header>
 <nav>
     <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../listado_psicologos">Nuestros Psicólogos</a></li>
-        <li><a href="#">Proyectos</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="admin">Inicio</a></li>
+        <li><a href="listado_psicologos_admin">Nuestros Psicólogos</a></li>
+        <li><a href="nuevo">Crear Psicólogo</a></li>
+        <li><a href="#">Crear Cliente</a></li>
     </ul>
 
     <form>
@@ -34,16 +34,16 @@
     </div>
 
     <h1>Buscar Psicólogos por Localidad</h1>
-    <form id="search-form" th:action="@{/psicologos/buscarPorLocalidad}" method="get">
+    <form id="search-form" th:action="@{/psicologos/buscarPorLocalidad}" method="post">
         <input id="search-box" type="text" name="localidad" placeholder="Ingrese localidad">
         <button type="submit" class="submit2">Buscar</button>
     </form>
-    <h1>Listado de Psicólogos por Etiqueta <span th:text="${etiqueta}">[Etiqueta]</span></h1>
+    <h1>Listado de Psicólogos</h1>
 
-    <div class="container" th:if="${psicologosPage}" >
-        <div class="profile-card" th:each="psicologos : ${psicologosPage.content}">
+    <div class="container" th:each="psicologos : ${psicologos}">
+        <div class="profile-card">
             <div class="profile-image">
-                <img src="../../img/usuario.png" alt="Alberto Sancho">
+                <img src="img/usuario.png" alt="Alberto Sancho">
             </div>
             <div class="profile-info">
                 <h2 class="profile-name" th:text="${psicologos.nombre}">Alberto Sancho</h2>
@@ -51,20 +51,8 @@
 
                 </span>
                 <p class="profile-description" th:text="${psicologos.descripcion}">Es posible que te hayas preguntado: no sé si merece la pena, qué vergüenza, decirte que yo también pasé por esa fase, Alberto, ¿tú?, sí, has leído bien. Hago sesiones de mayor duración con lo que podremos distanciar más las sesiones.</p>
-                <a th:href="@{/psicologos/detalle/{id}(id=${psicologos.id})}" class="profile-link">Ver Ficha</a>
+                <a href="#" class="profile-link">Ver Ficha</a>
             </div>
-
-        </div>
-        <div class="pagination-container">
-            <ul class="pagination">
-                <li th:classappend="${psicologosPage.first ? 'disabled' : ''}">
-                    <a th:href="@{/psicologos/etiqueta/{etiqueta}(etiqueta=${etiqueta}, page=${psicologosPage.number - 1}, size=${psicologosPage.size})}">Anterior</a>
-                </li>
-                <li th:classappend="${psicologosPage.last ? 'disabled' : ''}">
-                    <a th:href="@{/psicologos/etiqueta/{etiqueta}(etiqueta=${etiqueta}, page=${psicologosPage.number + 1}, size=${psicologosPage.size})}">Siguiente</a>
-                </li>
-            </ul>
-
         </div>
     </div>
 </main>
@@ -74,5 +62,4 @@
 </footer>
 
 </body>
-</html>
 </html>
