@@ -10,6 +10,7 @@
             type="text/css" />
     <link rel="shortcut icon" href="../../img/logo.png">
     <link rel="stylesheet" href="../../css/detallesPsicologo.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -41,8 +42,14 @@
 </nav>
 
 
+
+
     <main class="main-content" th:object="${psicologos}">
+
         <section class="profile-card">
+            <i class="fas fa-edit" id="edit-icon"></i>
+            <a href="@{/psicologos/delete/{id}(id=${psicologos.id})}">
+                <i class="fas fa-trash-alt" id="delete-icon"></i></a>
             <img src="/img/usuario.png" class="profile-pic">
             <h1 th:text="*{nombre}">Gaby Muñoz</h1>
             <p class="verified">Psicólogo verificado por Psychobook</p>

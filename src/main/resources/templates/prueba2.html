@@ -13,9 +13,23 @@
 <main>
     <h1 th:text="'Psicólogos en ' + ${city}">Psicólogos en Ciudad</h1>
     <!-- Contenedor para la lista de psicólogos -->
-    <div class="container">
-        <!-- Elemento individual para un psicólogo -->
-        <!-- Asegúrate de repetir este bloque para cada psicólogo usando th:each -->
+    <div class="form-section">
+        <h2>Datos Opcionales</h2>
+        <div class="form-group">
+            <label for="especialidad">Especialidad:</label>
+            <select id="especialidad" th:field="*{centro.id}" class="form-control" onchange="mostrarSiguienteEspecialidad()">
+                <option value="">Seleccione una Especialidad</option>
+                <option th:each="especialidad : ${especialidades}"
+                        th:value="${especialidad.id}"
+                        th:text="${especialidad.nombre}">Centro 1</option>
+            </select>
+        </div>
+        <div style="display:none;" id="contenedorEspecialidades">
+            <select id="templateEspecialidad">
+                <option value="">Seleccione una Especialidad</option>
+                <option th:each="especialidad : ${especialidades}" th:value="${especialidad.id}" th:text="${especialidad.nombre}"></option>
+            </select>
+        </div>
     </div>
 </main>
 

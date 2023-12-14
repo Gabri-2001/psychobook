@@ -182,147 +182,126 @@ footer {
     font-size: 1em;
 }
 
-.main-content {
+
+
+.form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.form-usuario {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 50px auto;
-    max-width: 1000px;
-    background: #fff;
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    gap: 10px;
 }
 
-
-.profile-card {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-.profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 5px solid #eee;
-    margin-bottom: 20px;
-}
-
-
-.verified {
-    background-color: #4CAF50;
-    color: white;
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 6px;
+.form-group {
     margin-bottom: 15px;
 }
-.professional-info {
-    display: flex;
+
+.form-control {
     width: 100%;
-    gap: 20px;
-    align-items: flex-start;
-    padding-bottom: 60px;
-    position:relative;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.info-and-reviews {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
-}
-
-.info-section, .reviews-section, .servicios-section {
-    padding: 20px;
-    background-color: #e0f2f1;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
-
-.contact-and-additional-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-
-
-.contact-info, .resenyas-info, .atencion-info {
-    padding: 20px;
-    background-color: #e0f2f1;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.info-section h2, .reviews-section h2, .servicios-section h2, .contact-info h2, .atencion-info h2, .resenyas-info h2 {
-    color: #004d40;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #d4d4d4;
-    padding-bottom: 10px;
-}
-
-.floating-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+.btn-submit {
     padding: 10px 20px;
-    background-color: #00695c;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    transition: background-color 0.3s;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.floating-button:hover {
     background-color: #004d40;
+    color: white;
+    border: none;
     border-radius: 5px;
-    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.main-content {
+.btn-submit:hover {
+    background-color: #00695c;
+}
+
+.toggle-switch {
     position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
+.toggle-switch .checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-#edit-icon,
-#delete-icon {
+.toggle-switch .label {
     position: absolute;
-    top: 20px;
-    color: #00695c;
-    font-size: 24px;
-    z-index: 5;
-
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
 }
 
-#edit-icon {
-    right: 70px;
+.toggle-switch .label:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
 }
 
-#delete-icon {
-    right: 20px;
-
+.toggle-switch .checkbox:checked + .label {
+    background-color: #2196F3;
 }
 
-
-#edit-icon:hover,
-#delete-icon:hover {
-    color: #ffcc00;
-        cursor: pointer;
+.toggle-switch .checkbox:focus + .label {
+    box-shadow: 0 0 1px #2196F3;
 }
 
+.toggle-switch .checkbox:checked + .label:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
 
+/* Added Styles for Text */
+.toggle-switch .label .inner {
+    display: none;
+}
 
-
+.toggle-switch .checkbox:checked + .label .inner {
+    display: block;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+.password-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1em;
+    position: relative; /* A
+}
 

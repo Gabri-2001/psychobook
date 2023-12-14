@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+
+    <title>PsychoBook</title>
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
+            rel="stylesheet"
+            type="text/css" />
+    <link rel="shortcut icon" href="../../img/logo.png">
+    <link rel="stylesheet" href="../../css/registroPsicologo.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+
+
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="../../img/logo.png" alt="Logo" />
+    </div>
+    <h1>Psychobook</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/admin">Inicio</a></li>
+        <li><a href="/listado_psicologos_admin">Nuestros Psicólogos</a></li>
+        <li><a href="/psicologos_admin/crear_usuario">Crear Usuario</a></li>
+        <li><a href="/psicologos_admin/crear_psicologo">Crear Psicólogo</a></li>
+        <li><a href="/psicologos_admin/crear_cliente">Crear Cliente</a></li>
+    </ul>
+
+
+    <form>
+        <input type="search" name="q" placeholder="Buscar" />
+        <input type="submit" value="¡Vamos!" />
+    </form>
+</nav>
+
+<main>
+
+    <h1>Crear nuevo Psicólogo</h1>
+
+        <form th:action="@{/psicologos/guardar}" th:object="${psicologo}" method="post">
+            <!-- Campos ocultos para ID -->
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{user.id}" />
+
+            <!-- Campos para Centro -->
+            <input type="text" th:field="*{centro.nombre}" placeholder="Nombre Centro" />
+            <input type="text" th:field="*{centro.direccion}" placeholder="Dirección Centro" />
+            <input type="text" th:field="*{centro.localidad}" placeholder="Localidad Centro" />
+            <input type="url" th:field="*{centro.web}" placeholder="Web Centro" />
+
+        <button type="submit">Guardar Psicólogo</button>
+    </form>
+
+</main>
+
+<footer>
+    <p>©Copyright 2023 PsychoBook. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

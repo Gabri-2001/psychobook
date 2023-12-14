@@ -4,9 +4,7 @@ import gabriel.ademar.diaz.arnold.psychobook.entities.Clientes;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.service.ClientesService;
 import gabriel.ademar.diaz.arnold.psychobook.service.PsicologosService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +21,12 @@ public class ClientesController {
     @GetMapping
     public List<Clientes> getAllClientes() {
         return clienteService.getAllClientes();
+    }
+
+    @PostMapping("/guardar")
+    public Clientes guardarCliente(@ModelAttribute Clientes clientes) {
+
+        return clienteService.guardarCliente(clientes);
     }
 
 

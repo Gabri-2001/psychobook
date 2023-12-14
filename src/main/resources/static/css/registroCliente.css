@@ -182,147 +182,90 @@ footer {
     font-size: 1em;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 50px auto;
+.main-container {
     max-width: 1000px;
-    background: #fff;
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-.profile-card {
-    position: relative;
+.main-title {
     text-align: center;
-    width: 100%;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-.profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 5px solid #eee;
+    color: #004d40;
     margin-bottom: 20px;
 }
 
-
-.verified {
-    background-color: #4CAF50;
-    color: white;
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-}
-.professional-info {
-    display: flex;
-    width: 100%;
-    gap: 20px;
-    align-items: flex-start;
-    padding-bottom: 60px;
-    position:relative;
-}
-
-.info-and-reviews {
+.psicologo-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.form-section {
     flex: 1;
-}
-
-.info-section, .reviews-section, .servicios-section {
+    background: #f9f9f9;
     padding: 20px;
-    background-color: #e0f2f1;
+    margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.contact-and-additional-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-
-
-.contact-info, .resenyas-info, .atencion-info {
-    padding: 20px;
-    background-color: #e0f2f1;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.info-section h2, .reviews-section h2, .servicios-section h2, .contact-info h2, .atencion-info h2, .resenyas-info h2 {
+.form-section h2 {
     color: #004d40;
     margin-bottom: 15px;
-    border-bottom: 2px solid #d4d4d4;
-    padding-bottom: 10px;
 }
 
-.floating-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #00695c;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    transition: background-color 0.3s;
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.floating-button:hover {
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.submit-button {
+    padding: 10px 20px;
     background-color: #004d40;
+    color: white;
+    border: none;
     border-radius: 5px;
-    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center;
 }
 
-.main-content {
-    position: relative;
+.submit-button:hover {
+    background-color: #00695c;
 }
+.form-row {
+     display: flex;
+     justify-content: space-between;
+     gap: 20px;
+ }
 
+ .btn-submit {
+     padding: 10px 20px;
+     background-color: #004d40;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s;
+ }
 
-#edit-icon,
-#delete-icon {
-    position: absolute;
-    top: 20px;
-    color: #00695c;
-    font-size: 24px;
-    z-index: 5;
-
-}
-
-#edit-icon {
-    right: 70px;
-}
-
-#delete-icon {
-    right: 20px;
-
-}
-
-
-#edit-icon:hover,
-#delete-icon:hover {
-    color: #ffcc00;
-        cursor: pointer;
-}
-
-
-
-
-
+ .btn-submit:hover {
+     background-color: #00695c;
+ }

@@ -8,7 +8,8 @@
             href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
             rel="stylesheet"
             type="text/css" />
-    <link rel="stylesheet" href="css/index_admin.css"/>
+    <link rel="shortcut icon" href="../../img/logo.png">
+    <link rel="stylesheet" href="../../css/registroPsicologo.css"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 
@@ -20,17 +21,18 @@
 
 <header>
     <div class="logo-container">
-        <img src="/img/logo.png" alt="Logo" />
+        <img src="../../img/logo.png" alt="Logo" />
     </div>
     <h1>Psychobook</h1>
 </header>
 
 <nav>
     <ul>
-        <li><a href="admin">Inicio</a></li>
-        <li><a href="listado_psicologos_admin">Nuestros Psicólogos</a></li>
-        <li><a href="#">Proyectos</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="/admin">Inicio</a></li>
+        <li><a href="/listado_psicologos_admin">Nuestros Psicólogos</a></li>
+        <li><a href="/psicologos_admin/crear_usuario">Crear Usuario</a></li>
+        <li><a href="/psicologos_admin/crear_psicologo">Crear Psicólogo</a></li>
+        <li><a href="/psicologos_admin/crear_cliente">Crear Cliente</a></li>
     </ul>
 
 
@@ -41,15 +43,88 @@
 </nav>
 
 <main>
-    <h1>Crear nuevo Psicólogo</h1>
+    <div class="main-container">
+    <h1 class="main-title">Crear nuevo Psicólogo</h1>
 
-    <form th:action="@{/psicologos/guardar}" th:object="${psicologo}" method="post">
-        <input type="text" th:field="*{nombre}" placeholder="Nombre" />
-        <input type="text" th:field="*{descripcion}" placeholder="Descripción" />
-        <input type="text" th:field="*{localidad}" placeholder="Localidad" />
-        <input type="file" name="imagenFile" />
-        <button type="submit">Guardar Psicólogo</button>
+        <form th:action="@{/psicologos/guardar}" th:object="${psicologo}" method="post" class="psicologo-form">
+
+            <input style="display:none;" th:field="*{user.id}" th:text="${user}">
+
+            <div class="form-row">
+            <div class="form-section">
+                <h2>Datos del Psicólogo</h2>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Nombre" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" th:field="*{descripcion}" placeholder="Descripción" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="localidad">Localidad:</label>
+                    <input type="text" id="localidad" th:field="*{localidad}" placeholder="Localidad" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:field="*{email}" placeholder="Email de Contacto" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Telefono:</label>
+                    <input type="text" id="telefono" th:field="*{telefono}" placeholder="Telefono" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="colegiado">Colegiado:</label>
+                    <input type="text" id="colegiado" th:field="*{colegiado}" placeholder="Colegiado" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="presencial">Presencial:</label>
+                    <input type="checkbox" id="presencial" th:field="*{presencial}" placeholder="Presencial" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="linea">Linea:</label>
+                    <input type="checkbox" id="linea" th:field="*{linea}" placeholder="Linea" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género:</label>
+                    <select id="genero" th:field="*{genero}" placeholder="Género" class="form-control" >
+                        <option value="">Seleccion Género</option>
+                        <option value="F">Femenino</option>
+                        <option value="M">Masculino</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-section">
+                <h2>Datos del Centro</h2>
+                <div class="form-group">
+                    <label for="centro">Nombre del Centro:</label>
+                    <select id="centro" th:field="*{centro.id}" class="form-control" onchange="actualizarDatosCentro()">
+                        <option value="">Seleccione un Centro</option>
+                        <option th:each="centro : ${centros}"
+                                th:value="${centro.id}"
+                                th:text="${centro.nombre}">Centro 1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="centro-direccion">Dirección:</label>
+                    <textarea id="centro-direccion" th:field="*{centro.direccion}" readonly placeholder="Dirección" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="centro-localidad">Localidad:</label>
+                    <input type="text" id="centro-localidad" th:field="*{centro.localidad}" readonly placeholder="Localidad" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="centro-web">Web:</label>
+                    <input type="text" id="centro-web" th:field="*{centro.web}" readonly placeholder="Web" class="form-control" />
+                </div>
+            </div>
+            </div>
+
+        <button type="submit" class="btn-submit">Guardar Psicólogo</button>
     </form>
+    </div>
 </main>
 
 <footer>
@@ -57,3 +132,19 @@
 </footer>
 </body>
 </html>
+
+<script>
+function actualizarDatosCentro() {
+    var centroId = document.getElementById('centro').value;
+    if (centroId) {
+        fetch('/api/centros/' + centroId)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('centro-direccion').value = data.direccion;
+                document.getElementById('centro-localidad').value = data.localidad;
+                document.getElementById('centro-web').value = data.web;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+}
+</script>

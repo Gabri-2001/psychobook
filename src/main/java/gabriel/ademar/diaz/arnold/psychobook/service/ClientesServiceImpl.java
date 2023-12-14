@@ -21,4 +21,9 @@ public class ClientesServiceImpl implements ClientesService{
     public List<Clientes> getAllClientes() {
         return clientesRepository.findAll();
     }
+
+    @Override
+    public Clientes guardarCliente(Clientes clientes) {
+        return clientesRepository.save(clientes);
+    }
 }

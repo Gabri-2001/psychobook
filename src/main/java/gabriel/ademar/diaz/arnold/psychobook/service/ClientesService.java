@@ -8,4 +8,6 @@ import java.util.List;
 public interface ClientesService {
 
     List<Clientes> getAllClientes();
+
+    Clientes guardarCliente(Clientes clientes);
 }

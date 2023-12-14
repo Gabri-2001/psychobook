@@ -16,9 +16,9 @@
     <h1>Psychobook</h1></header>
 <nav>
     <ul>
-        <li><a href="../index">Inicio</a></li>
-        <li><a href="../listado_psicologos">Nuestros Psicólogos</a></li>
-        <li><a href="#">Proyectos</a></li>
+        <li><a href="../admin">Inicio</a></li>
+        <li><a href="../listado_psicologos_admin">Nuestros Psicólogos</a></li>
+        <li><a href="nuevo">Crear Psicólogo</a></li>
         <li><a href="#">Contacto</a></li>
     </ul>
 
@@ -30,11 +30,11 @@
 
 <main>
     <div class="etiquetas">
-        <a th:each="etiquetas : ${etiquetas}" th:text="${etiquetas.nombre}" th:href="@{/psicologos/etiqueta/{etiqueta}(etiqueta=${etiquetas.nombre})}"></a>
+        <a th:each="etiquetas : ${etiquetas}" th:text="${etiquetas.nombre}" th:href="@{/psicologos_admin/etiqueta/{etiqueta}(etiqueta=${etiquetas.nombre})}"></a>
     </div>
 
     <h1>Buscar Psicólogos por Localidad</h1>
-    <form id="search-form" th:action="@{/psicologos/buscarPorLocalidad}" method="get">
+    <form id="search-form" th:action="@{/psicologos_admin/localidad}" method="get">
         <input id="search-box" type="text" name="localidad" placeholder="Ingrese localidad" th:value="${localidad}">
         <button type="submit" class="submit2">Buscar</button>
     </form>

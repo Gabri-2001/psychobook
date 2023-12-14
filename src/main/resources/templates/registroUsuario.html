@@ -1,0 +1,128 @@
+    <!doctype html>
+    <html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>PsychoBook</title>
+        <link
+                href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
+                rel="stylesheet"
+                type="text/css" />
+        <link rel="shortcut icon" href="../../img/logo.png">
+        <link rel="stylesheet" href="../../css/registroUsuario.css"/>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+
+
+
+    </head>
+
+    <body>
+
+    <header>
+        <div class="logo-container">
+            <img src="../../img/logo.png" alt="Logo" />
+        </div>
+        <h1>Psychobook</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/admin">Inicio</a></li>
+            <li><a href="/listado_psicologos_admin">Nuestros Psicólogos</a></li>
+            <li><a href="/psicologos_admin/crear_usuario">Crear Usuario</a></li>
+            <li><a href="/psicologos_admin/crear_psicologo">Crear Psicólogo</a></li>
+            <li><a href="/psicologos_admin/crear_cliente">Crear Cliente</a></li>
+        </ul>
+
+
+        <form>
+            <input type="search" name="q" placeholder="Buscar" />
+            <input type="submit" value="¡Vamos!" />
+        </form>
+    </nav>
+    <div th:if="${emailDuplicate}" class="password-error">
+        <p th:text="${errorMessage}">Mensaje de error predeterminado</p>
+    </div>
+    <div id="passwordError" class="password-error" style="display: none;">
+        Las contraseñas no coinciden.
+    </div>
+    <main>
+        <div class="form-container">
+            <h1>Crear nuevo Usuario</h1>
+            <form th:action="@{/usuario/guardar}" th:object="${user}" method="post" class="form-usuario" onsubmit="return checkPasswords()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" th:field="*{email}" placeholder="Introduce tu email" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" th:field="*{password}" placeholder="Contraseña" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Contraseña</label>
+                    <input id="confirm-password" type="password" placeholder="Confirmar Contraseña" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                <div class="toggle-switch">
+                    <input type="checkbox" id="switch" class="checkbox"
+                           onchange="updateRole(this)" th:checked="*{rol == 'psicologo'}"/>
+                    <label for="switch" class="label">
+                        <span class="inner"></span>
+                        <span class="switch"></span>
+                    </label>
+                </div>
+                </div>
+                <p>Rol seleccionado: <span id="selected-role">Cliente</span></p>
+                <input type="hidden" th:field="*{rol}" id="role-field" />
+                <button type="submit" class="btn-submit">Guardar Usuario</button>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>©Copyright 2023 PsychoBook. Todos los derechos reservados.</p>
+    </footer>
+    </body>
+    </html>
+
+    <script>
+        function updateRole(checkboxElem) {
+            var hiddenField = document.getElementById('role-field');
+            var selectedRoleDisplay = document.getElementById('selected-role');
+
+            if (checkboxElem.checked) {
+                hiddenField.value = 'psicologo';
+                selectedRoleDisplay.textContent = 'Psicólogo';
+            } else {
+                hiddenField.value = 'cliente';
+                selectedRoleDisplay.textContent = 'Cliente';
+            }
+        }
+
+        // Inicializa el texto del rol seleccionado al cargar la página
+        window.onload = function() {
+            var checkboxElem = document.getElementById('switch');
+            updateRole(checkboxElem);
+        };
+
+        function checkPasswords() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+        passwordError.style.display = "block"; // Mostrar el mensaje
+        return false;
+    }
+    else{
+        passwordError.style.display = "none"; // Ocultar el mensaje
+        return true; // Permite que el formulario se envíe
+    }
+
+
+}
+    </script>

@@ -2,10 +2,10 @@
 <html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Buscador de Psicólogos - PsychoBook</title>
+    <title>Buscador de Psicólogos</title>
     <link rel="shortcut icon" href="/img/logo.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../css/listado_psicologos_admin.css" />
+    <link rel="stylesheet" href="../css/resultadosBusqueda.css"/>
 </head>
 
 <body>
@@ -16,11 +16,10 @@
     <h1>Psychobook</h1></header>
 <nav>
     <ul>
-        <li><a href="/admin">Inicio</a></li>
-        <li><a href="/listado_psicologos_admin">Nuestros Psicólogos</a></li>
-        <li><a href="/psicologos_admin/crear_usuario">Crear Usuario</a></li>
-        <li><a href="/psicologos_admin/crear_usuario">Crear Psicólogo</a></li>
-        <li><a href="/psicologos_admin/crear_usuario">Crear Cliente</a></li>
+        <li><a href="../index">Inicio</a></li>
+        <li><a href="../listado_psicologos">Nuestros Psicólogos</a></li>
+        <li><a href="#">Proyectos</a></li>
+        <li><a href="#">Contacto</a></li>
     </ul>
 
     <form>
@@ -30,21 +29,21 @@
 </nav>
 
 <main>
-    <div class="etiquetas" >
-        <a th:each="etiquetas : ${etiquetas}" th:href="@{/psicologos_admin/etiqueta/{etiqueta}(etiqueta=${etiquetas.nombre})}" th:text="${etiquetas.nombre}"></a>
+    <div class="etiquetas">
+        <a th:each="etiquetas : ${etiquetas}" th:text="${etiquetas.nombre}" th:href="@{/psicologos/etiqueta/{etiqueta}(etiqueta=${etiquetas.nombre})}"></a>
     </div>
 
     <h1>Buscar Psicólogos por Localidad</h1>
-    <form id="search-form" th:action="@{/psicologos_admin/localidad}" method="get">
-        <input id="search-box" type="text" name="localidad" placeholder="Ingrese localidad">
+    <form id="search-form" th:action="@{/psicologos/localidad}" method="get">
+        <input id="search-box" type="text" name="localidad" placeholder="Ingrese localidad" th:value="${localidad}">
         <button type="submit" class="submit2">Buscar</button>
     </form>
-    <h1>Listado de Psicólogos</h1>
+    <h1>Listado de Psicólogos de <span th:text="${localidad}">[Localidad]</span></h1>
 
     <div class="container" th:if="${psicologosPage}" >
         <div class="profile-card" th:each="psicologos : ${psicologosPage.content}">
             <div class="profile-image">
-                <img src="img/usuario.png" alt="Alberto Sancho">
+                <img src="../img/usuario.png" alt="Alberto Sancho">
             </div>
             <div class="profile-info">
                 <h2 class="profile-name" th:text="${psicologos.nombre}">Alberto Sancho</h2>
@@ -59,10 +58,10 @@
         <div class="pagination-container">
             <ul class="pagination">
                 <li th:classappend="${psicologosPage.first ? 'disabled' : ''}">
-                    <a th:href="@{/listado_psicologos_admin(page=${psicologosPage.number - 1}, size=${psicologosPage.size})}">Anterior</a>
+                    <a th:href="@{/psicologos/buscarPorLocalidad(localidad=${localidad}, page=${psicologosPage.number - 1}, size=${psicologosPage.size})}">Anterior</a>
                 </li>
                 <li th:classappend="${psicologosPage.last ? 'disabled' : ''}">
-                    <a th:href="@{/listado_psicologos_admin(page=${psicologosPage.number + 1}, size=${psicologosPage.size})}">Siguiente</a>
+                    <a th:href="@{/psicologos/buscarPorLocalidad(localidad=${localidad}, page=${psicologosPage.number + 1}, size=${psicologosPage.size})}">Siguiente</a>
                 </li>
             </ul>
 

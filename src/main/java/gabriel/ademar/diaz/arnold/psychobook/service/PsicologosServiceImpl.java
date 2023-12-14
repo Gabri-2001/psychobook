@@ -28,7 +28,6 @@ public class PsicologosServiceImpl implements PsicologosService{
 
     @Override
     public Psicologos guardarPsicologo(Psicologos psicologo) {
-        // Lógica de negocios adicional si es necesario
         return psicologosRepository.save(psicologo);
     }
 
@@ -62,6 +61,11 @@ public class PsicologosServiceImpl implements PsicologosService{
 
     public Page<Psicologos> getAllPsicologos(Pageable pageable) {
         return psicologosRepository.findAll(pageable);
+    }
+
+    @Override
+    public void deletePsicologo(Long id) {
+        psicologosRepository.deleteById(id);
     }
 
 
