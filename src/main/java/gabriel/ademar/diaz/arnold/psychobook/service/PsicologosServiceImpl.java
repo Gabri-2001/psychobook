@@ -3,6 +3,7 @@ package gabriel.ademar.diaz.arnold.psychobook.service;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Especialidades;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.repository.PsicologosRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -65,7 +66,20 @@ public class PsicologosServiceImpl implements PsicologosService{
 
     @Override
     public void deletePsicologo(Long id) {
-        psicologosRepository.deleteById(id);
+
+        Psicologos psicologo = psicologosRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Psicólogo no encontrado con ID: " + id));
+        psicologosRepository.delete(psicologo);
+    }
+
+    @Override
+    public void updatePsicologo(Psicologos psicologo) {
+        psicologosRepository.save(psicologo);
+    }
+
+    @Override
+    public Page<Psicologos> getByNombre(String nombre, Pageable pageable) {
+        return psicologosRepository.findByNombreContainingIgnoreCase(nombre, pageable);
     }
 
 

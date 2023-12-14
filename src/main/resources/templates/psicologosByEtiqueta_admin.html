@@ -16,14 +16,14 @@
     <h1>Psychobook</h1></header>
 <nav>
     <ul>
-        <li><a href="../../index_admin">Inicio</a></li>
+        <li><a href="../../admin">Inicio</a></li>
         <li><a href="../../listado_psicologos_admin">Nuestros Psicólogos</a></li>
-        <li><a href="nuevo">Crear Psicólogo</a></li>
+        <li><a href="/psicologos_admin/crear_usuario">Crear Usuario</a></li>
         <li><a href="#">Contacto</a></li>
     </ul>
 
-    <form>
-        <input type="search" name="q" placeholder="Buscar" />
+    <form th:action="@{/psicologos_admin/nombre}" method="get">
+        <input type="search" placeholder="Buscar" name="nombre" />
         <input type="submit" class="submit" value="¡Vamos!" />
     </form>
 </nav>
@@ -51,17 +51,17 @@
 
                 </span>
                 <p class="profile-description" th:text="${psicologos.descripcion}">Es posible que te hayas preguntado: no sé si merece la pena, qué vergüenza, decirte que yo también pasé por esa fase, Alberto, ¿tú?, sí, has leído bien. Hago sesiones de mayor duración con lo que podremos distanciar más las sesiones.</p>
-                <a th:href="@{/psicologos/detalle/{id}(id=${psicologos.id})}" class="profile-link">Ver Ficha</a>
+                <a th:href="@{/psicologos_admin/detalle/{id}(id=${psicologos.id})}" class="profile-link">Ver Ficha</a>
             </div>
 
         </div>
         <div class="pagination-container">
             <ul class="pagination">
                 <li th:classappend="${psicologosPage.first ? 'disabled' : ''}">
-                    <a th:href="@{/psicologos/etiqueta/{etiqueta}(etiqueta=${etiqueta}, page=${psicologosPage.number - 1}, size=${psicologosPage.size})}">Anterior</a>
+                    <a th:href="@{/psicologos_admin/etiqueta/{etiqueta}(etiqueta=${etiqueta}, page=${psicologosPage.number - 1}, size=${psicologosPage.size})}">Anterior</a>
                 </li>
                 <li th:classappend="${psicologosPage.last ? 'disabled' : ''}">
-                    <a th:href="@{/psicologos/etiqueta/{etiqueta}(etiqueta=${etiqueta}, page=${psicologosPage.number + 1}, size=${psicologosPage.size})}">Siguiente</a>
+                    <a th:href="@{/psicologos_admin/etiqueta/{etiqueta}(etiqueta=${etiqueta}, page=${psicologosPage.number + 1}, size=${psicologosPage.size})}">Siguiente</a>
                 </li>
             </ul>
 

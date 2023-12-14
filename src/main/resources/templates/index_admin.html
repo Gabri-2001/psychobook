@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
 
@@ -35,9 +35,9 @@
     </ul>
 
 
-    <form>
-        <input type="search" name="q" placeholder="Buscar" />
-        <input type="submit" value="¡Vamos!" />
+    <form th:action="@{/psicologos_admin/nombre}" method="get">
+        <input type="search" placeholder="Buscar" name="nombre" />
+        <input type="submit" class="submit" value="¡Vamos!" />
     </form>
 </nav>
 

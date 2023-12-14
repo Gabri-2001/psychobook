@@ -291,6 +291,36 @@ footer {
     color: #fff;
 }
 
+.main-content {
+    position: relative;
+}
+
+
+#edit-icon,
+#delete-icon {
+    position: absolute;
+    top: 20px;
+    color: #00695c;
+    font-size: 24px;
+    z-index: 5;
+
+}
+
+#edit-icon {
+    right: 70px;
+}
+
+#delete-icon {
+    right: 20px;
+
+}
+
+
+#edit-icon:hover,
+#delete-icon:hover {
+    color: #ffcc00;
+        cursor: pointer;
+}
 
 
 

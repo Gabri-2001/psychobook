@@ -17,4 +17,7 @@ public interface PsicologosService {
     Psicologos buscarPorId(Long id);
     Page<Psicologos> getAllPsicologos(Pageable pageable);
     void deletePsicologo(Long id);
+    void updatePsicologo(Psicologos psicologo);
+
+    Page<Psicologos> getByNombre(String nombre, Pageable pageable);
 }

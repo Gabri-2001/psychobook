@@ -16,5 +16,8 @@ public interface UsersService {
 
     boolean emailDuplicate(String email);
 
+    void deleteUser(Long id);
+
+
 
 }

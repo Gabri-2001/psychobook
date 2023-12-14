@@ -14,4 +14,6 @@ public interface PsicologosRepository extends JpaRepository<Psicologos, Long> {
     Page<Psicologos> findByLocalidad(String localidad, Pageable pageable);
 
     Page<Psicologos> findByEtiquetasNombre(String nombreEtiqueta, Pageable pageable);
+
+    Page<Psicologos> findByNombreContainingIgnoreCase(String nombre, Pageable pageable);
 }

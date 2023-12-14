@@ -9,7 +9,7 @@
             rel="stylesheet"
             type="text/css" />
     <link rel="shortcut icon" href="../../img/logo.png">
-    <link rel="stylesheet" href="../../css/detallesPsicologo.css" />
+    <link rel="stylesheet" href="../../css/detallesPsicologo_admin.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 
@@ -28,16 +28,16 @@
 
 <nav>
     <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../listado_psicologos">Nuestros Psicólogos</a></li>
-        <li><a href="#">Proyectos</a></li>
+        <li><a href="../../admin">Inicio</a></li>
+        <li><a href="../../listado_psicologos_admin">Nuestros Psicólogos</a></li>
+        <li><a href="/psicologos_admin/crear_usuario">Crear Usuario</a></li>
         <li><a href="#">Contacto</a></li>
     </ul>
 
 
-    <form>
-        <input type="search" name="q" placeholder="Buscar" />
-        <input type="submit" value="¡Vamos!" />
+    <form th:action="@{/psicologos_admin/nombre}" method="get">
+        <input type="search" placeholder="Buscar" name="nombre" />
+        <input type="submit" class="submit" value="¡Vamos!" />
     </form>
 </nav>
 
@@ -46,7 +46,11 @@
 
     <main class="main-content" th:object="${psicologos}">
 
+        <input type="hidden" th:field="*{id}">
+
         <section class="profile-card">
+            <i class="fas fa-edit" id="edit-icon" th:onclick="'editPsicologo(' + ${psicologos.id} + ');'"></i>
+            <i class="fas fa-trash-alt" id="delete-icon" th:onclick="'deletePsicologo(' + ${psicologos.id} + ');'"></i>
             <img src="/img/usuario.png" class="profile-pic">
             <h1 th:text="*{nombre}">Gaby Muñoz</h1>
             <p class="verified">Psicólogo verificado por Psychobook</p>
@@ -95,7 +99,7 @@
                 <p>Comentario: <span th:text="${resenyas.comentario}"></span></p>
             </div>
             </div>
-            <a href="/listado_psicologos" class="floating-button">Volver</a>
+            <a href="/listado_psicologos_admin" class="floating-button">Volver</a>
         </section>
     </main>
 
@@ -104,3 +108,44 @@
 </footer>
 </body>
 </html>
+
+<script>
+function deletePsicologo(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar este psicólogo? Esta acción no se puede deshacer.')) {
+        fetch(`/api/psicologos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'X-CSRF-TOKEN': csrfToken // Descomenta y agrega el token CSRF si es necesario
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud de eliminación');
+            }
+            return response.json(); // Si tu backend envía una respuesta en JSON
+        })
+        .then(data => {
+            alert('Psicólogo eliminado correctamente.');
+            window.location.href = '/listado_psicologos'; // Asegúrate de que esta URL sea correcta
+        })
+        .catch(error => {
+            if(error.message == 'Unexpected end of JSON input'){
+
+                alert('Psicólogo eliminado correctamente.');
+                window.location.href = '/listado_psicologos_admin';
+            }
+            else{
+                alert(error.message);
+            }
+        });
+    } else {
+        console.log('Eliminación cancelada'); // Puedes quitar esta línea o usarla para depuración
+    }
+}
+
+function editPsicologo(id) {
+    window.location.href = '/psicologos_admin/editar/' + id;
+}
+</script>

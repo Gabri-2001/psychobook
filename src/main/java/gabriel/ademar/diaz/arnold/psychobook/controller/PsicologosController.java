@@ -1,16 +1,13 @@
 package gabriel.ademar.diaz.arnold.psychobook.controller;
 
-import gabriel.ademar.diaz.arnold.psychobook.entities.Especialidades;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.service.PsicologosService;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
+import gabriel.ademar.diaz.arnold.psychobook.service.UsersService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +17,11 @@ import java.util.List;
 public class PsicologosController {
 
     private final PsicologosService psicologoService;
+    private final UsersService usersService;
 
-    public PsicologosController(PsicologosService psicologoService) {
+    public PsicologosController(PsicologosService psicologoService, UsersService usersService) {
         this.psicologoService = psicologoService;
+        this.usersService = usersService;
     }
 
     @GetMapping("/psicologosfindAll")
@@ -53,6 +52,13 @@ public class PsicologosController {
         return psicologoService.buscarPorEtiqueta(etiqueta, pageable);
     }
 
+    @GetMapping("psicologosByNombre")
+    public Page<Psicologos> psicologosByNombre(@RequestParam String nombre, @RequestParam(defaultValue = "0") int page,
+                                                 @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return psicologoService.getByNombre(nombre, pageable);
+    }
+
     @GetMapping("/psicologo/detalle/{id}")
     public Psicologos mostrarDetallePsicologo(@PathVariable Long id) {
         return psicologoService.buscarPorId(id);
@@ -64,17 +70,21 @@ public class PsicologosController {
         return psicologoService.guardarPsicologo(psicologo);
     }
 
+    @PostMapping("/update")
+    public void updatePsicologo(@ModelAttribute Psicologos psicologo) {
+
+        psicologoService.updatePsicologo(psicologo);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePsicologo(@PathVariable Long id) {
         try {
+            Psicologos psicologos = psicologoService.buscarPorId(id);
             psicologoService.deletePsicologo(id);
-            return new ResponseEntity<>(new Mensaje("Psicólogo eliminado correctamente"), HttpStatus.OK);
-        } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity<>(new Mensaje("Psicólogo no encontrado"), HttpStatus.NOT_FOUND);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>(new Mensaje("No se puede eliminar el psicólogo debido a restricciones de la base de datos"), HttpStatus.CONFLICT);
+            usersService.deleteUser(psicologos.getUser().getId());
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return new ResponseEntity<>(new Mensaje("Error al eliminar el psicólogo"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Mensaje("Error al eliminar el psicólogo"));
         }
     }
 
@@ -84,8 +94,6 @@ public class PsicologosController {
         public Mensaje(String mensaje) {
             this.mensaje = mensaje;
         }
-
-        // Getter y Setter
 
 }
 

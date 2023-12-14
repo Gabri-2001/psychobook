@@ -41,6 +41,9 @@ public class ViewController {
     ClientesController clientesController;
 
     @Autowired
+    ServiciosController serviciosController;
+
+    @Autowired
     private PsicologosService psicologosService;
 
     @GetMapping("/index")
@@ -96,6 +99,44 @@ public class ViewController {
         }
     }
 
+    @GetMapping("/psicologos/nombre")
+    public String psicolgosByNombre(@RequestParam String nombre,@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size, Model model) {
+
+        if(nombre.equals("")){
+            return "redirect:/listado_psicologos";
+        }
+        else {
+
+            System.out.println(nombre);
+            Page<Psicologos> psicologosPage = psicologosController.psicologosByNombre(nombre, page, size);
+            List<Etiquetas> etiquetas = etiquetasController.getAllEtiquetas();
+            model.addAttribute("psicologosPage", psicologosPage);
+            model.addAttribute("etiquetas", etiquetas);
+            model.addAttribute("nombre", nombre);
+            return "psicologosByNombre"; // Nombre de la vista que muestra los resultados
+        }
+    }
+
+    @GetMapping("/psicologos_admin/nombre")
+    public String psicolgosByNombre_admin(@RequestParam String nombre,@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size, Model model) {
+
+        if(nombre.equals("")){
+            return "redirect:/listado_psicologos_admin";
+        }
+        else {
+
+            System.out.println(nombre);
+            Page<Psicologos> psicologosPage = psicologosController.psicologosByNombre(nombre, page, size);
+            List<Etiquetas> etiquetas = etiquetasController.getAllEtiquetas();
+            model.addAttribute("psicologosPage", psicologosPage);
+            model.addAttribute("etiquetas", etiquetas);
+            model.addAttribute("nombre", nombre);
+            return "psicologosByNombre_admin"; // Nombre de la vista que muestra los resultados
+        }
+    }
+
     @GetMapping("psicologos/etiqueta/{etiqueta}")
     public String psicologosByEtiqueta(@PathVariable("etiqueta") String etiqueta, @RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "10") int size, Model model) {
@@ -112,6 +153,13 @@ public class ViewController {
         Psicologos psicologos = psicologosController.mostrarDetallePsicologo(id);
         model.addAttribute("psicologos", psicologos);
         return "detallesPsicologo";
+    }
+
+    @GetMapping("/psicologos_admin/detalle/{id}")
+    public String mostrarDetallePsicologo_admin(@PathVariable Long id, Model model) {
+        Psicologos psicologos = psicologosController.mostrarDetallePsicologo(id);
+        model.addAttribute("psicologos", psicologos);
+        return "detallesPsicologo_admin";
     }
 
     @GetMapping("/admin")
@@ -254,6 +302,28 @@ public class ViewController {
         return "redirect:/listado_psicologos_admin";
     }
 
+    @PostMapping("/psicologos/update")
+    public String updatePsicologo(
+            @ModelAttribute Psicologos psicologo,
+            RedirectAttributes redirectAttributes) {
+
+
+        System.out.println(psicologo.getId());
+        System.out.println(psicologo.getUser());
+        System.out.println(psicologo.getNombre());
+        System.out.println(psicologo.getUser().getId());
+
+        System.out.println("ID: " + psicologo.getId());
+        System.out.println("Nombre: " + psicologo.getNombre());
+        if (psicologo.getUser() != null) {
+            System.out.println("User ID: " + psicologo.getUser().getId());
+        }
+
+        psicologosController.updatePsicologo(psicologo);
+        redirectAttributes.addFlashAttribute("message", "Psicólogo guardado con éxito");
+        return "redirect:/listado_psicologos_admin";
+    }
+
     @PostMapping("/cliente/guardar")
     public String guardarCliente(
             @ModelAttribute Clientes clientes,
@@ -270,12 +340,34 @@ public class ViewController {
         return "redirect:/listado_psicologos_admin";
     }
 
+    @GetMapping("psicologos_admin/editar/{id}")
+    public String showEditPsicologoForm(@PathVariable Long id, Model model) {
+        Psicologos psicologo = psicologosController.mostrarDetallePsicologo(id);
+        List<Centros> centros = centrosController.getAllCentros();
+        List<Especialidades> especialidades = especialidadesController.getAllEspecialidades();
+        List<Servicios> servicios = serviciosController.getAllServicios();
+        List<Centros> sortedUniqueCentros = centros.stream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Centros::getNombre))),
+                        ArrayList::new));
+
+        model.addAttribute("psicologo", psicologo);
+        model.addAttribute("centros", sortedUniqueCentros);
+        model.addAttribute("especialidades", especialidades);
+        model.addAttribute("servicios", servicios);
+        return "updatePsicologo"; // El nombre del archivo HTML del formulario de edición
+    }
 
     // Método para eliminar después de la confirmación
     @PostMapping("/delete/{id}")
     public String deletePsicologo(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            psicologosService.deletePsicologo(id);
+            Psicologos psicologos = psicologosService.buscarPorId(id);
+            System.out.println(psicologos.getUser().getId());
+            psicologosController.deletePsicologo(id);
+            System.out.println(psicologos.getUser().getId());
+            usersController.deleteUser(psicologos.getUser().getId());
+
             redirectAttributes.addFlashAttribute("success", "El psicólogo ha sido eliminado correctamente.");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Hubo un problema al eliminar el psicólogo.");

@@ -22,8 +22,8 @@
         <li><a href="#">Contacto</a></li>
     </ul>
 
-    <form>
-        <input type="search" name="q" placeholder="Buscar" />
+    <form th:action="@{/psicologos/nombre}" method="get">
+        <input type="search" placeholder="Buscar" name="nombre" />
         <input type="submit" class="submit" value="¡Vamos!" />
     </form>
 </nav>
