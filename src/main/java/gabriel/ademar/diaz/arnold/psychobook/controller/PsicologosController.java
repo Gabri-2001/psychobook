@@ -29,14 +29,13 @@ public class PsicologosController {
         return psicologoService.getAllPsicologos();
     }
 
-    @GetMapping("psicologosPage")
+    @GetMapping("/psicologosPage")
     public Page<Psicologos> getAllPagePsicologos(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return psicologoService.getAllPsicologos(pageable);
     }
-
 
     @GetMapping("psicologosByLocalidad")
     public Page<Psicologos> psicologosByLocalidad(@RequestParam String localidad, @RequestParam(defaultValue = "0") int page,

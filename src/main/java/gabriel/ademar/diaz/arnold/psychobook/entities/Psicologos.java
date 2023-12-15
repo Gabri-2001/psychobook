@@ -72,7 +72,6 @@ public class Psicologos {
     )
     private List<Especialidades> especialidades;
 
-
     @ManyToMany
     @JoinTable(
             name = "psicologosHasEtiquetas",
@@ -80,7 +79,6 @@ public class Psicologos {
             inverseJoinColumns = @JoinColumn(name = "etiquetas_id")
     )
     private List<Etiquetas> etiquetas;
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "psicologo")

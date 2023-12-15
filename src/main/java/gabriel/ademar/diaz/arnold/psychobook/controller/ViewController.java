@@ -2,18 +2,15 @@ package gabriel.ademar.diaz.arnold.psychobook.controller;
 
 import gabriel.ademar.diaz.arnold.psychobook.entities.*;
 import gabriel.ademar.diaz.arnold.psychobook.service.PsicologosService;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.ManyToOne;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -50,6 +47,38 @@ public class ViewController {
     public String index() {
         return "index";
     }
+
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new Users());
+        return "login";
+    }
+
+    @PostMapping("/login_user")
+    public String login(@ModelAttribute Users user, Model model)
+            throws NoSuchAlgorithmException, IOException {
+        Optional<Users> usuario = usersController.findUserByEmail(user.getEmail());
+
+        System.out.println(user.getPassword());
+
+        if (usuario.isPresent() && usuario.get().getPassword().equals(user.getPassword())) {
+            if (usuario.get().getRol().equals("admin")) {
+                return "index_admin";
+            }
+            if (usuario.get().getRol().equals("psicologo") || usuario.get().getRol().equals("cliente")) {
+                return "index";
+            } else {
+                model.addAttribute("user", new Users());
+                return "login";
+            }
+        } else {
+            model.addAttribute("user", new Users());
+            return "login";
+        }
+    }
+
+
 
     @GetMapping("/psychologists")
     public String showPsychologists(Model model) {
@@ -265,7 +294,9 @@ public class ViewController {
         user.setEmail(email);
         user.setPassword(password);
         user.setRol(rol);
-        if (usersController.emailDuplicate(user.getEmail())) {
+        Optional<Users> users = usersController.findUserByEmail(user.getEmail());
+
+        if (users.isPresent()) {
             model.addAttribute("emailDuplicate", true);
             model.addAttribute("errorMessage", "El email ya está en uso.");
             model.addAttribute("user", new Users());

@@ -1,117 +1,82 @@
-body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: normal;
-    font-size: 100%;
-    color: #1b262c;
-    
+* {
     margin: 0;
-    background-color: #dbdada;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#contenedor {
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+#login-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
-    min-width: 100vw;
     min-height: 100vh;
-    width: 100%;
-    height: 100%;
 }
 
-#central {
-    max-width: 320px;
-    width: 100%;
+#login-form {
+    width: 400px; /* Aumentado para dar más espacio */
+    padding: 40px; /* Padding aumentado para mejor apariencia */
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 20px; /* Espacio alrededor del formulario */
 }
 
-.titulo {
-    font-size: 250%;
-    color:#0f5d91;
+#login-form .titulo {
+    font-size: 2.5em; /* Tamaño de fuente aumentado para más impacto */
+    color: #333;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Espacio aumentado debajo del título */
 }
 
-#login {
+#login-form input {
     width: 100%;
-    padding: 50px 30px;
-    background-color: #2cbadd;
-    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    border-radius: 3px 3px 3px 3px;
-    box-sizing: border-box;
+    padding: 12px; /* Padding aumentado para más comodidad */
+    margin-bottom: 15px; /* Espacio aumentado entre campos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
 }
 
-#login input {
-    font-family: 'Overpass', sans-serif;
-    font-size: 110%;
-    color: #1b262c;
-    display: block;
+#login-form button {
     width: 100%;
-    height: 40px;
-    margin-bottom: 10px;
-    padding: 5px 5px 5px 10px;
-    box-sizing: border-box;
+    padding: 15px; /* Padding aumentado para un botón más grande */
+    background-color: #00695c;
+    color: #fff;
     border: none;
-    border-radius: 3px 3px 3px 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1em; /* Tamaño de fuente aumentado */
 }
 
-#login input::placeholder {
-    font-family: 'Overpass', sans-serif;
-    color: #E4E4E4;
+#login-form button:hover {
+    background-color: #004d40;
 }
 
-#login button {
-    font-family: 'Overpass', sans-serif;
-    font-size: 110%;
-    color:whitesmoke;
-    width: 100%;
-    height: 40px;
-    border: none;
-    
-    border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    
-    background-color: #0f5d91;
-    
-    margin-top: 10px;
-}
-
-#login button:hover {
-    background-color: #0f4c75;
-    color:#bbe1fa;
-}
-
-.pie-form {
-    font-size: 90%;
-    text-align: center;    
-    margin-top: 15px;
-}
-
-.pie-form a {
-    display: block;
-    text-decoration: none;
-    color: whitesmoke;
-    margin-bottom: 3px;
-}
-
-.pie-form a:hover {
-    color: #0f4c75;
-}
-
-.inferior {
-    margin-top: 10px;
-    font-size: 90%;
+#login-form .pie-form {
     text-align: center;
+    margin-top: 20px; /* Espacio aumentado */
+    font-size: 0.9em;
 }
 
-.inferior a {
-    display: block;
+#login-form .pie-form a {
+    color: #00695c;
     text-decoration: none;
-    color: #bbe1fa;
-    margin-bottom: 3px;
 }
 
-.inferior a:hover {
-    color: #3282b8;
+#login-form .pie-form a:hover {
+    color: #004d40;
+}
+
+.logo-login {
+    display: block;
+    max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto 20px; /* Centra la imagen y agrega margen en la parte inferior */
 }

@@ -1,6 +1,5 @@
 package gabriel.ademar.diaz.arnold.psychobook.service;
 
-import gabriel.ademar.diaz.arnold.psychobook.entities.Psicologos;
 import gabriel.ademar.diaz.arnold.psychobook.entities.Users;
 import gabriel.ademar.diaz.arnold.psychobook.repository.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -34,14 +33,14 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public boolean emailDuplicate(String email) {
-        return usersRepository.findByEmail(email).isPresent();
-    }
-
-    @Override
     public void deleteUser(Long id) {
         Users user = usersRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + id));
         usersRepository.delete(user);
+    }
+
+    @Override
+    public Optional<Users> findUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
     }
 }

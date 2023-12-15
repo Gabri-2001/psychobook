@@ -14,7 +14,7 @@ public interface UsersService {
 
     Optional<Users> findUserById(Long id);
 
-    boolean emailDuplicate(String email);
+    Optional<Users> findUserByEmail(String email);
 
     void deleteUser(Long id);
 
